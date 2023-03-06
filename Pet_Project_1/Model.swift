@@ -7,10 +7,10 @@
 
 import Foundation
 
-var ToDoList: [String] = ["1", "2"]
+var ToDoList: [[String: Any]] = [["Name": "1", "isComplited": false], ["Name": "2", "isComplited": true]]
 
-func addList(nameList: String) {
-    ToDoList.append(nameList) //Добавление нового элемента
+func addList(nameList: String, isComplited: Bool = false) {
+    ToDoList.append(["Name": nameList, "isComplited": isComplited]) //Добавление нового элемента
     saveData()
 }
 
@@ -19,7 +19,14 @@ func removeList(at index: Int) {
     saveData()
 }
 
+func changeState (at list: Int) -> Bool {
+    ToDoList[list]["isComplited"] = !(ToDoList[list]["isComplited"] as! Bool)
+    saveData()
+    return ToDoList[list]["isComplited"] as! Bool
+} //Выбор галочки в списке дел 
+
 func saveData() {
+    print ("Save data!")
     
 }
 

@@ -40,7 +40,14 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        cell.textLabel?.text = ToDoList[indexPath.row]
+        let currentList = ToDoList[indexPath.row]
+        cell.textLabel?.text = currentList["Name"] as? String
+        
+        if (currentList["isComplited"] as? Bool) == true {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        } //поставновка галочки у выполненного списка дел
 
         return cell
     }
@@ -61,6 +68,15 @@ class TableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if changeState(at: indexPath.row) {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        } else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }
+    } //Обработка выбора галочки у списка дел
 
     /*
     // Override to support rearranging the table view.

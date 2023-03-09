@@ -33,6 +33,13 @@ var ToDoList: [[String: Any]] {
         //saveData()
     }
     
+    func moveList (fromIndex: Int, toIndex: Int) {
+        let from = ToDoList[fromIndex]
+        ToDoList.remove(at: fromIndex)
+        ToDoList.insert(from, at: toIndex)
+        
+    } //Реализация метода изменения индексов строк
+
     func changeState (at list: Int) -> Bool {
         ToDoList[list]["isComplited"] = !(ToDoList[list]["isComplited"] as! Bool)
         //saveData()

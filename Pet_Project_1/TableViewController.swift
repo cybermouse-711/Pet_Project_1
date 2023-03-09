@@ -98,9 +98,6 @@ class TableViewController: UITableViewController {
     } //Обработка выбора галочки у списка дел
 
     
-    
-    
-     //Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         moveList(fromIndex: fromIndexPath.row, toIndex: to.row)
         

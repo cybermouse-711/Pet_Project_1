@@ -9,6 +9,9 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
+    @IBAction func pushEditAction(_ sender: Any) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    } //Кнопка редактирования
     
     @IBAction func pushAddAction(_ sender: Any) {
         let alertControler = UIAlertController(title: "Create new list", message: nil, preferredStyle: .alert) //Всплывающее окно для добавления записей
@@ -96,12 +99,14 @@ class TableViewController: UITableViewController {
 
     
     
-    /*
-    // Override to support rearranging the table view.
+    
+     //Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
+        moveList(fromIndex: fromIndexPath.row, toIndex: to.row)
+        
+        tableView.reloadData()
+    } //Метод для изменения индексов строк
+    
 
     /*
     // Override to support conditional rearranging of the table view.

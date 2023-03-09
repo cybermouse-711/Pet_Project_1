@@ -11,9 +11,25 @@ class TableViewController: UITableViewController {
 
     
     @IBAction func pushAddAction(_ sender: Any) {
-        addList(nameList: "New List")
-        tableView.reloadData()
-    } //Кнопка добавления листов
+        let alertControler = UIAlertController(title: "Create new list", message: nil, preferredStyle: .alert) //Всплывающее окно для добавления записей
+        
+        alertControler.addTextField { (textField) in textField.placeholder = "New list name"
+        } //Окно текста
+        
+        let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
+        } //Кнопка закрытия окна
+        
+        let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
+            let newList = alertControler.textFields![0].text
+            addList(nameList: newList!)
+            self.tableView.reloadData()
+        } //Кнопка добавления новой записи
+        
+        
+        alertControler.addAction(alertAction1)
+        alertControler.addAction(alertAction2)
+        present(alertControler, animated: true, completion: nil)
+    } //Вызов кнопки
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +94,8 @@ class TableViewController: UITableViewController {
         }
     } //Обработка выбора галочки у списка дел
 
+    
+    
     /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {

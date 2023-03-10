@@ -59,14 +59,17 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
+        //let doneImage = UIImageView(image: UIImage(named: "done")!)
+
+        
         let currentList = ToDoList[indexPath.row]
         cell.textLabel?.text = currentList["Name"] as? String
         
         if (currentList["isComplited"] as? Bool) == true {
-            cell.accessoryType = .checkmark
+            cell.imageView?.image = UIImage(named: "done")
         } else {
-            cell.accessoryType = .none
-        } //поставновка галочки у выполненного списка дел
+            cell.imageView?.image = UIImage(named: "notdone")
+        } //Постановка галочки у выполненного списка дел (через картинку)
 
         return cell
     }
@@ -90,10 +93,12 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         if changeState(at: indexPath.row) {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+            
+            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "done")
         } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "notdone")
         }
     } //Обработка выбора галочки у списка дел
 

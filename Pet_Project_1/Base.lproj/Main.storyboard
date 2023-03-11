@@ -47,7 +47,7 @@
                     <navigationItem key="navigationItem" title="ToDo List" id="DHg-e3-HlM">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="l70-1m-mGj">
-                                <color key="tintColor" systemColor="tintColor"/>
+                                <color key="tintColor" systemColor="labelColor"/>
                                 <connections>
                                     <action selector="pushAddAction:" destination="PIf-oT-PCc" id="3xJ-dB-k6Q"/>
                                 </connections>
@@ -87,14 +87,14 @@
     </scenes>
     <resources>
         <image name="done" width="27" height="27"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

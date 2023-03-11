@@ -11,6 +11,9 @@ class TableViewController: UITableViewController {
 
     @IBAction func pushEditAction(_ sender: Any) {
         tableView.setEditing(!tableView.isEditing, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.tableView.reloadData()
+        } //Выполнение прозрачности через 0.2 секунды после срабатывания анимации
     } //Кнопка редактирования
     
     @IBAction func pushAddAction(_ sender: Any) {
@@ -36,6 +39,9 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.tableFooterView = UIView() //Скрытие лишних полей
+        tableView.backgroundColor = UIColor.systemGroupedBackground //Изменение цвета пустых полей
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -70,6 +76,15 @@ class TableViewController: UITableViewController {
         } else {
             cell.imageView?.image = UIImage(named: "notdone")
         } //Постановка галочки у выполненного списка дел (через картинку)
+        
+        
+        if tableView.isEditing {
+            cell.textLabel?.alpha = 0.3
+            cell.imageView?.alpha = 0.3
+        } else {
+            cell.textLabel?.alpha = 1
+            cell.imageView?.alpha = 1
+        } //Выставление прозрачности задач в режиме редактирования
 
         return cell
     }
@@ -109,6 +124,17 @@ class TableViewController: UITableViewController {
         tableView.reloadData()
     } //Метод для изменения индексов строк
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        if tableView.isEditing {
+            return .none
+        } else {
+            return .delete
+        }
+    } //Убирает минус слева в режиме редактирования
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    } //Перестает смещать ячйеку
 
     /*
     // Override to support conditional rearranging of the table view.

@@ -27,9 +27,11 @@ class TableViewController: UITableViewController {
         
         let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
             let newList = alertControler.textFields![0].text
-            addList(nameList: newList!)
-            self.tableView.reloadData()
-        } //Кнопка добавления новой записи
+            if newList != "" {
+                addList(nameList: newList!)
+                self.tableView.reloadData()
+            }
+        }//Кнопка добавления новой записи
         
         
         alertControler.addAction(alertAction1)
